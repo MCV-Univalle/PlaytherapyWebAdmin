@@ -13,6 +13,8 @@ import ListDiagnostic from '@/components/Diagnostic/ListDiagnostic'
 import UpdateDiagnostic from '@/components/Diagnostic/UpdateDiagnostic'
 import CreatePatient from '@/components/Patient/CreatePatient'
 import ListPatient from '@/components/Patient/ListPatient'
+import UpdatePatient from '@/components/Patient/UpdatePatient'
+import DeletePatient from '@/components/Patient/DeletePatient'
 
 Vue.use(Router)
 
@@ -74,16 +76,26 @@ export default new Router({
       component: UpdateDiagnostic
     },
     {
-      path: '/patient/create',
-      name: 'CreatePatient',
-      component: CreatePatient
-    }
-    ,
-    {
       path: '/patient',
       name: 'ListPatient',
       component: ListPatient
+    },
+    {
+      path: '/patient/create',
+      name: 'CreatePatient',
+      component: CreatePatient
+    },
+    {
+      path: '/patient/:patientId/update',
+      name: 'UpdatePatient',
+      component: UpdatePatient
+    },
+    {
+      path: '/patient/:patientId/delete',
+      name: 'DeletePatient',
+      component: DeletePatient
     }
+    
   ],
   mode: 'history'
 })
