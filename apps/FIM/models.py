@@ -5,47 +5,37 @@ class FunctionalIndependenceMeasure(models.Model):
 
     date = models.DateField()
     goal = models.BooleanField(default=False)
-    patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
-    
-    UNO = 1
-    DOS = 2 
-    TRES = 3
-    CUATRO = 4
-    CINCO = 5
-    SEIS = 6
-    SIETE = 7
-    NUMBER_CHOICES = [(UNO, UNO), (DOS, DOS), (TRES, TRES), (CUATRO, CUATRO), (CINCO, CINCO), (SEIS, SEIS), (SIETE, SIETE)]
-    
+    patient = models.ForeignKey(Patient, on_delete=models.CASCADE)  
     
     #selfcare
-    eat =  models.IntegerField(choices=NUMBER_CHOICES)
-    personal_clean =  models.IntegerField(choices=NUMBER_CHOICES)
-    bath =  models.IntegerField(choices=NUMBER_CHOICES)
-    dress_undress_sup =  models.IntegerField(choices=NUMBER_CHOICES)
-    dress_undress_inf =  models.IntegerField(choices=NUMBER_CHOICES)
-    bathUse =  models.IntegerField(choices=NUMBER_CHOICES)
+    eat =  models.IntegerField()
+    personal_clean =  models.IntegerField()
+    bath =  models.IntegerField()
+    dress_undress_sup =  models.IntegerField()
+    dress_undress_inf =  models.IntegerField()
+    bathUse =  models.IntegerField()
     
     #potty training
-    control_dregs =  models.IntegerField(choices=NUMBER_CHOICES)
-    control_urine =  models.IntegerField(choices=NUMBER_CHOICES)
+    control_dregs =  models.IntegerField()
+    control_urine =  models.IntegerField()
     
     #move
-    tras_bed_chair = models.IntegerField(choices=NUMBER_CHOICES)
-    tras_bath = models.IntegerField(choices=NUMBER_CHOICES)
-    tras_shower = models.IntegerField(choices=NUMBER_CHOICES)
+    tras_bed_chair = models.IntegerField()
+    tras_bath = models.IntegerField()
+    tras_shower = models.IntegerField()
     
     #move 
-    run_crawl_chair = models.IntegerField(choices=NUMBER_CHOICES)
-    steps = models.IntegerField(choices=NUMBER_CHOICES)
+    run_crawl_chair = models.IntegerField()
+    steps = models.IntegerField()
     
     #comunication
-    compresion = models.IntegerField(choices=NUMBER_CHOICES)
-    expresion = models.IntegerField(choices=NUMBER_CHOICES)
+    compresion = models.IntegerField()
+    expresion = models.IntegerField()
     
     #social cognition
-    social_inter = models.IntegerField(choices=NUMBER_CHOICES)
-    problem_solve = models.IntegerField(choices=NUMBER_CHOICES)
-    memory =  models.IntegerField(choices=NUMBER_CHOICES)
+    social_inter = models.IntegerField()
+    problem_solve = models.IntegerField()
+    memory =  models.IntegerField()
     
     def total(self):
         total = self.eat + self.personal_clean + self.bath + self.dress_undress_sup + self.dress_undress_inf + self.bathUse + self.control_dregs + self.control_urine

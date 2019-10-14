@@ -17,6 +17,7 @@ import UpdatePatient from '@/components/Patient/UpdatePatient'
 import DeletePatient from '@/components/Patient/DeletePatient'
 import CreateTherapist from '@/components/Therapist/CreateTherapist'
 import ListTherapist from '@/components/Therapist/ListTherapist'
+import CreateFim from '@/components/FIM/CreateFim'
 
 import Login from '@/components/Login/Login'
 
@@ -108,6 +109,11 @@ export default new Router({
       path: '/therapist',
       name: 'ListTherapist',
       component: ListTherapist
+    },
+    {
+      path: '/FIM/create',
+      name: 'CreateFim',
+      component: CreateFim
     },
     {
       path: '/loging',

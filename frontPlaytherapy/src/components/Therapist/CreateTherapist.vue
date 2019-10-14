@@ -91,6 +91,8 @@ export default {
         onSubmit(event){
             event.preventDefault()
             const path= `${process.env.BASE_URI}therapist/` 
+                        alert(path)
+
             alert("voy")
             axios.post(path, this.form).then((response)=>{
                 alert("2")
