@@ -15,6 +15,10 @@ import CreatePatient from '@/components/Patient/CreatePatient'
 import ListPatient from '@/components/Patient/ListPatient'
 import UpdatePatient from '@/components/Patient/UpdatePatient'
 import DeletePatient from '@/components/Patient/DeletePatient'
+import CreateTherapist from '@/components/Therapist/CreateTherapist'
+import ListTherapist from '@/components/Therapist/ListTherapist'
+
+import Login from '@/components/Login/Login'
 
 Vue.use(Router)
 
@@ -94,6 +98,21 @@ export default new Router({
       path: '/patient/:patientId/delete',
       name: 'DeletePatient',
       component: DeletePatient
+    },
+    {
+      path: '/therapist/create',
+      name: 'CreateTherapist',
+      component: CreateTherapist
+    },
+    {
+      path: '/therapist',
+      name: 'ListTherapist',
+      component: ListTherapist
+    },
+    {
+      path: '/loging',
+      name: 'Login',
+      component: Login
     }
     
   ],

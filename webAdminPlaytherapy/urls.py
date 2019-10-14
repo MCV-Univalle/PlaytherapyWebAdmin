@@ -17,10 +17,15 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls import url, include
 from django.views.generic import TemplateView
+from rest_framework_jwt.views import obtain_jwt_token, refresh_jwt_token
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/v1.0/', include('apps.patients.urls')),
+    path('api/v1.0/', include('apps.therapist.urls')),
+    path('api/v1.0/', include('apps.FIM.urls')),
+    url(r'^api/v1.0/auth/obtain_token/', obtain_jwt_token),
+    url(r'^api/v1.0/auth/refresh_token/', refresh_jwt_token),
 
     url(r'^.*$', TemplateView.as_view(template_name="index.html")),
 ]
