@@ -103,11 +103,6 @@
               sort: "asc"
             },
             {
-              label: "Usuario",
-              field: "user",
-              sort: "asc"
-            },
-            {
               label: "",
               field: "editar",
               sort: false,

@@ -11,15 +11,30 @@
                     <section>
                         <form class="needs-validation" novalidate @submit="checkForm">
                             <div class="col-md-12 mb-6">
+                                <label for="typeUser">Profesional</label>
+                                <select class="browser-default custom-select" 
+                                        v-model.trim="form.typeUser" 
+                                        placeholder="Tipo de profesional" 
+                                        required>
+                                    <option value="Terapeuta ocupacional">Terapeuta ocupacional</option>
+                                    <option value="Fisioterapeuta">Fisioterapeuta</option>
+                                </select>
+                                <div class="valid-feedback">
+                                    Excelente!
+                                </div>
+                                <div class="invalid-feedback">
+                                    Por favor seleccione el tipo de profesional a cargo.
+                                </div>
+                            </div>
+                            <div class="col-md-12 mb-6">
                                 <label for="id_type">Tipo de identificación</label>
                                 <select class="browser-default custom-select" 
-                                        v-model.trim="form.id_type" 
+                                        v-model.trim="form.identification" 
                                         placeholder="Tipo de identificación" 
                                         required>
-                                    <option value="1">Cédula de ciudadanía</option>
-                                    <option value="2">Tarjeta de identidad</option>
-                                    <option value="3">Cédula de extranjería</option>
-                                    <option value="3">Número de pasaporte</option>
+                                    <option value="Cédula de ciudadanía">Cédula de ciudadanía</option>
+                                    <option value="Cédula de extranjería">Cédula de extranjería</option>
+                                    <option value="Número de pasaporte">Número de pasaporte</option>
                                 </select>
                                 <div class="valid-feedback">
                                     Excelente!
@@ -122,7 +137,7 @@
                             </div>
                             <div class="col-md-12 mb-6">
                                 <label for="password">Confirmar contraseña</label>
-                                <input type="conformPassword" 
+                                <input type="password" 
                                     class="form-control" 
                                     name="confirmPassword" 
                                     placeholder="Confirmar contraseña" 
@@ -176,28 +191,49 @@
         methods: {
             onSubmit(event){
                 event.preventDefault()
-                const path= 'http://localhost:8000/auth/users/'
-                    console.log(this.form.name)
-                    console.log(this.form.password)
-                    console.log(this.form.name)
+                const pathCreateUser= 'http://localhost:8000/auth/users/'                
+                const pathCreateToken = 'http://localhost:8000/auth/jwt/create/'
+                const pathAccessToken = 'http://localhost:8000/auth/users/me/'
+                const pathTherapist = 'http://localhost:8000/api/v1.0/therapists/all-profiles'
 
-                axios.post(path, this.form).then((response)=>{
-                    this.form.name = response.data.username
-                    //this.form.lastname = response.data.last_name
+                axios.post(pathCreateUser, this.form).then((response)=>{
+                    localStorage.setItem('password',this.form.password);
+                    this.form.username = response.data.username
                     this.form.password = response.data.password
-                    //this.form.username = response.data.username
-                    this.form.email = response.data.email 
-                    //this.form.id_type = response.data.id_type
-                    //this.form.name = response.data.name 
-                    //this.form.lastname = response.data.lastname
-                    //this.form.genre = response.data.genre           
-                    swal("Therapeuta creado exitosamente.", "", "success")
-            })
-                .catch((error)=>{
-                    swal("No se ha podido crear el Terapeuta.", "", "error")
-                    console.log(error)
-                })
-            }, 
+                    this.form.email = response.data.email  
+                    this.form.password = localStorage.getItem('password')
+                    axios.post(pathCreateToken, this.form).then((response2)=>{
+                    this.form.username = response.data.username
+                    this.form.password = localStorage.getItem('password');
+                    localStorage.setItem('therapistToken',response2.data.access);
+                    var postData = {
+                            user: this.form.username,
+                            typeIdentification: this.form.identification,
+                            identification: this.form.username,
+                            name: this.form.name,
+                            lastname: this.form.lastname,
+                            genre: this.form.genre,
+                            typeUser:  this.form.typeUser
+                    };
+                    axios.get(pathAccessToken,
+                    { headers: {"Authorization" : `Bearer ${localStorage.getItem('therapistToken')}`} }) .then((response2) =>{
+                        axios.post(pathTherapist,postData, {
+                        headers: {"Authorization" : `Bearer ${localStorage.getItem('therapistToken')}`} }).then((response3)=>{
+                            this.form.identification = response3.data.typeIdentification
+                            this.form.username = response3.data.identification
+                            this.form.name = response3.data.name 
+                            this.form.lastname = response3.data.lastname
+                            this.form.genre = response3.data.genre  
+                            this.form.typeUser = response3.data.typeUser  
+                            swal( postData.typeUser +" creado exitosamente.", "", "success");
+                    }).catch((error)=>{
+                            swal("No se ha podido crear el "+ postData.typeUser , "", "error")
+                        })
+                    })
+                 })                   
+                    
+            })              
+        },
             checkForm(event) {
             event.target.classList.add('was-validated');
             this.onSubmit(event);
