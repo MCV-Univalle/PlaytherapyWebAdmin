@@ -122,10 +122,10 @@
                                     Por favor ingrese la ocupación.
                                 </div>
                             </div>
-                            <div class="col-md-12 mb-6 col-sm-12">
+                            <div class="col-md-12 mb-6 col-sm-12 ">
                                 <label for="entity">Entidad médica</label>
                                 <mdb-row>
-                                    <mdb-col center class="col-md-11 col-sm-10">
+                                    <mdb-col center class="col-md-11 col-sm-10 col-10">
                                         <select entity class="browser-default custom-select"  
                                                 v-model.trim="form.entity" 
                                                 required>
@@ -138,20 +138,13 @@
                                             </option>
                                         </select>
                                     </mdb-col>
-                                    <mdb-col class="col-md-1 col-sm-2">
-                                        <a @click.native="showModal13 = true" class="btn-sm btn-info white-text d-block margin-buttom"><mdb-icon  class="margin-icon" icon="plus" /></a>
-                                        
+                                    <mdb-col class="col-md-1 col-sm-2 col-2">
+                                        <a href="/entity/create" 
+                                            class="btn-sm btn-info white-text d-block margin-buttom"
+                                            data-toggle="tooltip" title="Añadir nueva entidad médica">
+                                            <mdb-icon  class="margin-icon" icon="plus" />
+                                        </a>                                        
                                     </mdb-col>
-                                    <mdb-modal centered :show="showModal13" @close="showModal13 = false">
-                                <mdb-modal-header>
-                                    <mdb-modal-title>Modal title</mdb-modal-title>
-                                </mdb-modal-header>
-                                <mdb-modal-body>...</mdb-modal-body>
-                                <mdb-modal-footer>
-                                    <mdb-btn color="secondary" @click.native="showModal13 = false">Close</mdb-btn>
-                                    <mdb-btn color="primary">Save changes</mdb-btn>
-                                </mdb-modal-footer>
-                            </mdb-modal>
                                 </mdb-row>
                                 <div class="valid-feedback">
                                     Excelente!
@@ -164,7 +157,7 @@
                             <div class="col-md-12 mb-6 col-sm-12">
                                 <label for="list_diagnostic">Diagnóstico</label>
                                 <mdb-row>
-                                    <mdb-col class="col-md-11 col-sm-10">
+                                    <mdb-col class="col-md-11 col-sm-10 col-10">
                                         <select diagnostic class="browser-default custom-select" 
                                                 v-model.trim="form.list_diagnostic" 
                                                 required>
@@ -177,8 +170,12 @@
                                             </option>
                                         </select>
                                     </mdb-col>
-                                    <mdb-col class="col-md-1 col-sm-2">
-                                        <a href="/diagnostic/create" class="btn-sm btn-info white-text d-block margin-buttom"><mdb-icon  class="margin-icon" icon="plus" /></a>
+                                    <mdb-col class="col-md-1 col-sm-2 col-2">
+                                        <a href="/diagnostic/create" 
+                                            class="btn-sm btn-info white-text d-block margin-buttom" 
+                                            data-toggle="tooltip" title="Añadir nuevo diagnóstico">
+                                            <mdb-icon  class="margin-icon" icon="plus" />
+                                        </a>
                                     </mdb-col>
                                 </mdb-row>                                    
                                 <div class="valid-feedback">
@@ -342,7 +339,34 @@
         height: 100%;
     } 
     .margin-icon {
-        margin-top: 20%;
-        margin-left: 35%;
-    }  
+        padding: 20% 32% 20%;
+    } 
+    @media all and (max-width: 1200px) {
+        .margin-icon {
+            padding: 30% 25% 10%;
+        } 
+    }
+    @media all and (max-width: 992px) {
+        .margin-icon {
+            padding: 65% 3% 5%;
+        } 
+    }
+    @media all and (max-width: 778px) {
+        
+        .margin-icon {
+            padding: 25% 30% 10%;
+        } 
+    }
+    @media all and (max-width: 576px) {
+        
+        .margin-icon {
+            padding: 25% 30% 10%;
+        } 
+    }
+    @media all and (max-width: 500px) {
+        
+        .margin-icon {
+            padding: 40% 15% 10%;
+        } 
+    }
 </style>

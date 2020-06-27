@@ -4,22 +4,22 @@
     <main :style="{marginTop: '90px'}">              
       <mdb-container>
         <mdb-row class="mt-5 justify-content-start">
-            <h4 class="demo-title"><strong>Lista de pacientes</strong></h4>      
+            <h4 class="demo-title"><strong>Lista de tipos de diagnósticos</strong></h4>      
         </mdb-row>
         <hr />
         <div class="flex-center">  
           <section class="demo-section">
             <section>
-              <div class="text-right mt-4">  
-                <mdb-btn size="sm" tag="a" color="blue-grey" href="/FIM/create" ><mdb-icon icon="calendar-check"/> FIM</mdb-btn>  
-                <mdb-btn size="sm" tag="a" color="info" href="/patient/update" ><mdb-icon icon="user-edit"/> Editar</mdb-btn>               
-                <mdb-btn size="sm" color="danger" @click="hidden=true"><mdb-icon icon="trash" /> Eliminar</mdb-btn>              
+              <div class="text-right mt-4">   
+                <mdb-btn size="sm" tag="a" color="info" href="/typeDiagnostic/update" ><mdb-icon icon="user-edit" /> Editar</mdb-btn>               
+                <mdb-btn size="sm" color="danger" @click="hidden=true"><mdb-icon icon="trash" /> Eliminar</mdb-btn>
               </div>
-              <mdb-datatable               
+              <mdb-datatable
                 :data="data"
                 striped
                 bordered
                 arrows
+                focus
                 :display="5"
                 responsive
                 entriesTitle="Mostrar entradas"
@@ -27,8 +27,7 @@
                 noFoundMessage="Información no encontrada"
                 showingText="Cantidad"
                 :tfoot= false
-                focus
-              />
+              />                 
               <mdb-container @hidden="handleHidden">
                 <mdb-modal centered :show="hidden" @close="hidden = false" warning>
                   <mdb-modal-header>
@@ -37,7 +36,7 @@
                   <mdb-modal-body>
                     <mdb-row>                     
                       <mdb-col>
-                        <p class="card-text"><strong>¿Desea eliminar al paciente {{}} ?</strong></p>
+                        <p class="card-text"><strong>¿Desea eliminar el tipo de diagnóstico {{}} ?</strong></p>
                       </mdb-col>
                     </mdb-row>
                   </mdb-modal-body>
@@ -46,29 +45,30 @@
                     <mdb-btn outline="warning" @click="hidden = false">Cancelar</mdb-btn>
                   </mdb-modal-footer>
                 </mdb-modal>
-              </mdb-container>  
-            </section>            
+              </mdb-container>          
+            </section>                     
           </section>           
-        </div>  
-      </mdb-container> 
-    </main>
-  </div>  
+        </div>   
+      </mdb-container>            
+    </main>       
+  </div>    
 </template>
 
 <script>
-  import {
-    mdbDatatable,
-    mdbBtn,
-    mdbIcon,
-    mdbRow,
-    mdbContainer,
-    mdbModal,
-    mdbModalHeader,
-    mdbModalTitle,
-    mdbModalBody,
-    mdbModalFooter,
-  } from "mdbvue";
-  import Navigation from '@/components/Navigation/Navigation';
+    import axios from 'axios';
+    import {
+        mdbDatatable,
+        mdbBtn,
+        mdbIcon,
+        mdbRow,
+        mdbContainer,
+        mdbModal,
+        mdbModalHeader,
+        mdbModalTitle,
+        mdbModalBody,
+        mdbModalFooter,
+    } from "mdbvue";
+    import Navigation from '@/components/Navigation/Navigation';
 
   export default {
     components: {
@@ -96,43 +96,12 @@
         return {          
           columns: [
             {
-              label: "Tipo de documento",
-              field: "id_type",
-              sort: "asc",
-            },
-            {
-              label: "Número de documento",
-              field: "id_num",
-              sort: "asc"
-            },
-            {
-              label: "Nombres",
+              label: "Nombre",
               field: "name",
               sort: "asc"
             },
-            {
-              label: "Apellidos",
-              field: "lastname",
-              sort: "asc"
-            },
-            {
-              label: "Género",
-              field: "genre",
-              sort: "asc"
-            },
-            {
-              label: "Ocupación",
-              field: "occupation",
-              sort: "asc"
-            },
-            {
-              label: "Fecha de nacimiento",
-              field: "birthday",
-              sort: "asc"
-            },
           ],
-          rows:this.rows
-     
+          rows: this.rows 
         };
       },
     },
@@ -151,11 +120,13 @@
       }
     },
     mounted(){
-      fetch('http://localhost:8000/api/v1.0/patient/?format=json')
+      fetch('')
         .then(res => res.json())
         .then(json => {
-          let keys = ["id_type", "id_num", "name", "lastname", "genre", "occupation", "birthday"];
+          let keys = ['name'];
           let entries = this.filterData(json, keys);
+          //columns
+          console.log(json)
           this.columns = keys.map(key => {
             return {
               label: key,
@@ -171,22 +142,21 @@
 </script>
 
 <style scoped>
-  .demo-section {
-    padding: 20px 0;
-  }
-  .demo-section > section {
-      border: 1px solid #e0e0e0;
-      padding: 15px;
-  }
-  .demo-section > h4 {
-      font-weight: bold;
-      margin-bottom: 20px;
-  }
-  .demo-title {
-      color: #9e9e9e;
-      font-weight: 700;
-      margin-bottom: 0;
-      padding-left: 15px;
-  }
+    .demo-section {
+        padding: 20px 0;
+    }
+    .demo-section > section {
+        border: 1px solid #e0e0e0;
+        padding: 15px;
+    }
+    .demo-section > h4 {
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
+    .demo-title {
+        color: #9e9e9e;
+        font-weight: 700;
+        margin-bottom: 0;
+        padding-left: 15px;
+    }  
 </style>
-

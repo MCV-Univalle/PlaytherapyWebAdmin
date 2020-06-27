@@ -10,11 +10,16 @@
         <div class="flex-center">  
           <section class="demo-section">
             <section>
+              <div class="text-right mt-4">   
+                <mdb-btn size="sm" tag="a" color="info" href="/therapist/update" ><mdb-icon icon="user-edit" /> Editar</mdb-btn>               
+                <mdb-btn size="sm" color="danger" @click="hidden=true"><mdb-icon icon="trash" /> Eliminar</mdb-btn>
+              </div>
               <mdb-datatable
                 :data="data"
                 striped
                 bordered
                 arrows
+                focus
                 :display="5"
                 responsive
                 entriesTitle="Mostrar entradas"
@@ -22,55 +27,68 @@
                 noFoundMessage="Información no encontrada"
                 showingText="Cantidad"
                 :tfoot= false
-              />
-            </section>            
+              />                 
+              <mdb-container @hidden="handleHidden">
+                <mdb-modal centered :show="hidden" @close="hidden = false" warning>
+                  <mdb-modal-header>
+                    <mdb-modal-title center>Advertencia!</mdb-modal-title>
+                  </mdb-modal-header>
+                  <mdb-modal-body>
+                    <mdb-row>                     
+                      <mdb-col>
+                        <p class="card-text"><strong>¿Desea eliminar al terapeuta {{}} ?</strong></p>
+                      </mdb-col>
+                    </mdb-row>
+                  </mdb-modal-body>
+                  <mdb-modal-footer center>
+                    <mdb-btn color="warning" @click="hidden = false">Aceptar</mdb-btn>
+                    <mdb-btn outline="warning" @click="hidden = false">Cancelar</mdb-btn>
+                  </mdb-modal-footer>
+                </mdb-modal>
+              </mdb-container>          
+            </section>                     
           </section>           
-        </div>  
-      </mdb-container> 
-    </main>
-  </div>  
+        </div>   
+      </mdb-container>            
+    </main>       
+  </div>    
 </template>
-<mdb-row>
-                            <mdb-btn rounded color="info" @click.native="warning = true"><mdb-icon icon="trash-alt" /> Eliminar</mdb-btn>
-                            <mdb-modal :show="warning" @close="warning = false" warning>
-                                <mdb-modal-header>
-                                    <mdb-modal-title class="text-center">Advertencia!</mdb-modal-title>
-                                </mdb-modal-header>
-                                <mdb-modal-body>
-                                    <mdb-row>
-                                    <mdb-col class="text-center">
-                                        <mdb-icon icon="exclamation-triangle" size="4x" class="mb-3 animated rotateIn"/>
-                                        <p class="card-text"><strong>¿Deseas eliminar al terapeuta: {{selected.name}} {{ selected.lastname}}?</strong></p>
-                                    </mdb-col>
-                                    </mdb-row>
-                                </mdb-modal-body>
-                                <mdb-modal-footer center>
-                                    <mdb-btn color="warning" @click.native="warning = false">Aceptar <mdb-icon icon="diamond" class="ml-1" color="white"/></mdb-btn>
-                                    <mdb-btn outline="warning" @click.native="warning = false">Cancelar</mdb-btn>
-                                </mdb-modal-footer>
-                            </mdb-modal>
-                        </mdb-row>
 
 <script>
     import axios from 'axios';
     import {
         mdbDatatable,
+        mdbBtn,
+        mdbIcon,
         mdbRow,
         mdbContainer,
+        mdbModal,
+        mdbModalHeader,
+        mdbModalTitle,
+        mdbModalBody,
+        mdbModalFooter,
     } from "mdbvue";
     import Navigation from '@/components/Navigation/Navigation';
 
   export default {
     components: {
       mdbDatatable,
+      mdbBtn,
       mdbContainer,
+      mdbIcon,
       mdbRow,
       Navigation,
+      mdbModal,
+      mdbModalHeader,
+      mdbModalTitle,
+      mdbModalBody,
+      mdbModalFooter,
     },
     data() {
       return {
         columns: [],
-        rows: []
+        rows: [],
+        hidden: false,
       };
     },
     computed: {

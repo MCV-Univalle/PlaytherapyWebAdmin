@@ -4,7 +4,7 @@
         <main :style="{marginTop: '90px'}">              
             <mdb-container>
                 <mdb-row class="mt-5 justify-content-start">
-                    <h4 class="demo-title"><strong>Registrar entidad médica</strong></h4>      
+                    <h4 class="demo-title"><strong>Actualizar tipo de diagnóstico</strong></h4>      
                 </mdb-row>
                 <hr />  
                 <section class="demo-section">
@@ -25,8 +25,8 @@
                                 </div>
                             </div> 
                             <div class="text-center mt-4">
-                                <mdb-btn color="info" type="submit" variant="success">Registrar</mdb-btn>
-                                <a href="/patient/create" class="btn btn-light black-text">Cancelar</a> 
+                                <mdb-btn color="info" type="submit" variant="success">Actualizar</mdb-btn>
+                                <a href="/typeDiagnostic" class="btn btn-light black-text">Cancelar</a> 
                             </div>                  
                         </form>
                     </section>                                       

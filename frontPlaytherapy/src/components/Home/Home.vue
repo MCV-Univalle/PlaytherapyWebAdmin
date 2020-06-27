@@ -24,7 +24,7 @@
               <mdb-card-body class="text-left" cascade>                
                 <mdb-navbar-nav nav vertical>
                   <mdb-nav-item href="/patient/create" >Registrar paciente</mdb-nav-item>
-                  <mdb-nav-item href="/patient">Listar Paciente</mdb-nav-item>
+                  <mdb-nav-item href="/patient">Listar pacientes</mdb-nav-item>
                 </mdb-navbar-nav>                
               </mdb-card-body>
             </mdb-card>
@@ -44,8 +44,8 @@
               </mdb-view>
               <mdb-card-body class="text-left" cascade>                
                 <mdb-navbar-nav nav vertical>
-                  <mdb-nav-item href="/therapist/create" >Registrar terapeutas</mdb-nav-item>
-                  <mdb-nav-item href="/therapist">Listar terapeutas</mdb-nav-item>
+                  <mdb-nav-item href="/therapist/create" >Registrar terapeuta</mdb-nav-item>
+                  <mdb-nav-item href="/therapist">Listar terapeutas</mdb-nav-item> 
                 </mdb-navbar-nav>                
               </mdb-card-body>
             </mdb-card>

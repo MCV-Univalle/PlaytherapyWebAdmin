@@ -38,137 +38,48 @@
                                     Por favor ingrese el nombre.
                                 </div>
                             </div>
-                            <div class="col-md-12 mb-6">                            
+                            <div class="col-md-12 mb-6  col-sm-12">                            
                                 <label for="typeDiagnostic">Tipo de diagnóstico</label>
-                                <select typeDiagnostic 
-                                        class="browser-default custom-select" 
-                                        id="inputGroupSelect04" 
-                                        v-model.trim="form.type_diagnostic" 
-                                        placeholder="Tipo de diagnóstico" 
-                                        aria-label="Example select with button addon" 
-                                        required>
-                                    <template slot:first>
-                                        <option :value="null" disabled>-- Por favor seleccione un tipo de diagnóstico --</option>
-                                    </template>
-                                        <option v-for="typeDiagnostic in typeDiagnostic" 
-                                                :key="typeDiagnostic.id" 
-                                                :value="typeDiagnostic.id" >{{ typeDiagnostic.name }} 
-                                        </option>
-                                </select>                                
+                                <mdb-row>
+                                    <mdb-col center class="col-md-11 col-sm-10 col-10">
+                                        <select typeDiagnostic 
+                                                class="browser-default custom-select" 
+                                                id="inputGroupSelect04" 
+                                                v-model.trim="form.type_diagnostic" 
+                                                placeholder="Tipo de diagnóstico" 
+                                                aria-label="Example select with button addon" 
+                                                required>
+                                            <template slot:first>
+                                                <option :value="null" disabled>-- Por favor seleccione un tipo de diagnóstico --</option>
+                                            </template>
+                                                <option v-for="typeDiagnostic in typeDiagnostic" 
+                                                        :key="typeDiagnostic.id" 
+                                                        :value="typeDiagnostic.id" >{{ typeDiagnostic.name }} 
+                                                </option>
+                                        </select>     
+                                    </mdb-col>
+                                        <mdb-col class="col-md-1 col-sm-2 col-2">
+                                            <a href="/entity/create" 
+                                                class="btn-sm btn-info white-text d-block margin-buttom"
+                                                data-toggle="tooltip" title="Añadir nuevo tipo de diagnóstico">
+                                                <mdb-icon  class="margin-icon" icon="plus" />
+                                            </a>                                        
+                                        </mdb-col>
+                                    </mdb-row>                          
                                 <div class="valid-feedback">
                                     Excelente!
                                 </div>
                                 <div class="invalid-feedback">
                                     Por favor seleccione el tipo de diagnóstico.
                                 </div>
-                            </div>  
+                            </div> 
                             <div class="text-center mt-4">
                                 <mdb-btn color="info" type="submit" variant="success">Registrar</mdb-btn>
                                 <a href="/patient/create" class="btn btn-light black-text">Cancelar</a> 
                             </div>                  
                         </form>
                     </section>                                       
-                </section>      
-                <mdb-col>  
-                    <hr />
-                    <mdb-row>
-                        <mdb-btn color="info" @click.native="info = true">
-                            <mdb-icon icon="plus" /> Añadir tipo de diagnóstico 
-                        </mdb-btn>
-                        <mdb-modal size="lg" :show="info" @close="info = false" info>
-                            <mdb-modal-header>
-                                <mdb-modal-title><strong>Registrar tipo de diagnóstico</strong> </mdb-modal-title>
-                            </mdb-modal-header>
-                            <mdb-modal-body>
-                                <section>
-                                    <form  class="needs-validation" novalidate @submit="checkForm">
-                                        <div class="form-row">                                            
-                                            <div class="col-md-12 mb-6">
-                                                <label for="name">Nombre</label>
-                                                <input type="text" 
-                                                        class="form-control" 
-                                                        name="name" 
-                                                        placeholder="Nombre" 
-                                                        v-model.trim="form.name" required>
-                                                <div class="valid-feedback">
-                                                    Excelente!
-                                                </div>
-                                                <div class="invalid-feedback">
-                                                    Por favor ingrese el nombre.
-                                                </div>
-                                            </div>
-                                        </div>  
-                                        <div class="text-center mt-4">                                
-                                            <mdb-btn color="info" >Registrar</mdb-btn>
-                                            <a href="/diagnostic/create" class="btn btn-light black-text">Cancelar</a> 
-                                        </div>            
-                                    </form>
-                                </section>
-                                <mdb-col> 
-                                    <mdb-row class="mt-5 justify-content-start">
-                                        <h4> Listado de tipos de diagnósticos registrados.</h4>   
-                                    </mdb-row>                                 
-                                    <hr/>
-                                    <mdb-row>
-                                        <section class="demo-section">                                    
-                                            <section>
-                                                <mdb-datatable
-                                                    :data="data"
-                                                    striped
-                                                    bordered
-                                                    arrows
-                                                    :display="5"
-                                                    responsive
-                                                    defaultRow="Información no encontrada"
-                                                    entriesTitle="Mostrar entradas"
-                                                    searchPlaceholder="Buscar"          
-                                                    noFoundMessage="Información no encontrada"
-                                                    showingText="Cantidad"                
-                                                    focus
-                                                />
-                                                <hr />
-                                                <h5>Editar el tipo de diagnóstico seleccionado:</h5>
-                                                <mdb-container v-if="selected">
-                                                    <mdb-row>
-                                                        <mdb-col>
-                                                        <mdb-input v-model="selected.name" />
-                                                        </mdb-col>
-                                                    </mdb-row>
-                                                    <mdb-row>
-                                                        <mdb-btn rounded color="info" 
-                                                                @click.native="warning = true"><mdb-icon 
-                                                                icon="trash-alt" /> Eliminar
-                                                        </mdb-btn>
-                                                        <mdb-modal centered :show="warning" @close="warning = false" >
-                                                            <mdb-modal-body>
-                                                                <mdb-row>
-                                                                    <mdb-col class="text-center">
-                                                                        <mdb-modal-title class="text-center"><strong>Advertencia!</strong></mdb-modal-title>
-                                                                        <mdb-icon color="warning" 
-                                                                                    icon="exclamation-triangle" 
-                                                                                    size="4x" 
-                                                                                    class="mb-3 animated rotateIn"/>
-                                                                        <p class="card-text">
-                                                                            <strong>¿Deseas eliminar el tipo de diagnóstico: {{selected.name}}?</strong>
-                                                                        </p>
-                                                                    </mdb-col>
-                                                                </mdb-row>
-                                                            </mdb-modal-body>
-                                                            <mdb-modal-footer center>
-                                                                <mdb-btn color="warning" @click.native="warning = false">Aceptar <mdb-icon icon="diamond" class="ml-1" color="white"/></mdb-btn>
-                                                                <mdb-btn outline="warning" @click.native="warning = false">Cancelar</mdb-btn>
-                                                            </mdb-modal-footer>
-                                                        </mdb-modal>
-                                                    </mdb-row>
-                                                </mdb-container>
-                                            </section>
-                                        </section>
-                                    </mdb-row>
-                                </mdb-col>       
-                            </mdb-modal-body>
-                        </mdb-modal>
-                    </mdb-row>
-                </mdb-col>       
+                </section>       
             </mdb-container>   
         </main>
     </div>
@@ -183,11 +94,6 @@
             mdbInput,
             mdbCol, 
             mdbDatatable,
-            mdbModal,
-            mdbModalHeader,
-            mdbModalTitle,
-            mdbModalBody,
-            mdbModalFooter,
     } from "mdbvue";
     import Navigation from '@/components/Navigation/Navigation';
 
@@ -201,11 +107,6 @@
             mdbInput,
             mdbCol, 
             mdbDatatable,
-            mdbModal,
-            mdbModalHeader,
-            mdbModalTitle,
-            mdbModalBody,
-            mdbModalFooter,
             Navigation
         },
         data(){
@@ -343,4 +244,39 @@
         margin-top: 20px;
         margin-bottom: 4px;
     }  
+    .margin-buttom {
+        margin-left: -15px;
+        height: 100%;
+    } 
+    .margin-icon {
+        padding: 20% 32% 20%;
+    } 
+    @media all and (max-width: 1200px) {
+        .margin-icon {
+            padding: 30% 25% 10%;
+        } 
+    }
+    @media all and (max-width: 992px) {
+        .margin-icon {
+            padding: 65% 3% 5%;
+        } 
+    }
+    @media all and (max-width: 778px) {
+        
+        .margin-icon {
+            padding: 25% 30% 10%;
+        } 
+    }
+    @media all and (max-width: 576px) {
+        
+        .margin-icon {
+            padding: 25% 30% 10%;
+        } 
+    }
+    @media all and (max-width: 500px) {
+        
+        .margin-icon {
+            padding: 40% 15% 10%;
+        } 
+    }
 </style>

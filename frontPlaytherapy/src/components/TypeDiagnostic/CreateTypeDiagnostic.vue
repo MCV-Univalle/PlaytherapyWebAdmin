@@ -4,7 +4,7 @@
         <main :style="{marginTop: '90px'}">              
             <mdb-container>
                 <mdb-row class="mt-5 justify-content-start">
-                    <h4 class="demo-title"><strong>Registrar entidad médica</strong></h4>      
+                    <h4 class="demo-title"><strong>Registrar tipo de diagnóstico</strong></h4>      
                 </mdb-row>
                 <hr />  
                 <section class="demo-section">
