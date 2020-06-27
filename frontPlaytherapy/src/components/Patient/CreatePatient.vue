@@ -341,6 +341,11 @@
     .margin-icon {
         padding: 20% 32% 20%;
     } 
+    @media all and (max-width: 1400px) {
+        .margin-icon {
+            padding: 20% 33% 10%;
+        } 
+    }
     @media all and (max-width: 1200px) {
         .margin-icon {
             padding: 30% 25% 10%;
@@ -355,6 +360,12 @@
         
         .margin-icon {
             padding: 25% 30% 10%;
+        } 
+    }
+    @media all and (max-width: 767px) {
+        
+        .margin-icon {
+            padding: 30% 25% 10%;
         } 
     }
     @media all and (max-width: 576px) {
