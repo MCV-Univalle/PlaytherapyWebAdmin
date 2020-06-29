@@ -16,11 +16,11 @@
                                         v-model.trim="form.id_type" 
                                         placeholder="Tipo de identificación" 
                                         required>
-                                    <option value="1">Cédula de ciudadanía</option>
-                                    <option value="2">Tarjeta de identidad</option>
-                                    <option value="3">Cédula de extranjería</option>
-                                    <option value="2">Registro civil</option>
-                                    <option value="3">Número de pasaporte</option>
+                                    <option value="Cédula de ciudadanía">Cédula de ciudadanía</option>
+                                    <option value="Tarjeta de identidad">Tarjeta de identidad</option>
+                                    <option value="Cédula de extranjería">Cédula de extranjería</option>
+                                    <option value="Registro civil">Registro civil</option>
+                                    <option value="Número de pasaporte">Número de pasaporte</option>
                                 </select>
                                 <div class="valid-feedback">
                                     Excelente!
@@ -144,15 +144,15 @@
                             </div>
                             <div class="col-md-12 mb-6">
                                 <label for="list_diagnostic">Diagnóstico</label>
-                                <select diagnostic class="browser-default custom-select" 
+                                <select list_diagnostic class="browser-default custom-select" 
                                         v-model.trim="form.list_diagnostic" 
                                         required>
                                     <template slot:first>
                                         <option :value="null" disabled>-- Por favor seleccione el diagnóstico del paciente --</option>
                                     </template>
-                                    <option v-for="diagnostic in diagnostic" 
-                                            :key="diagnostic.id" 
-                                            :value="diagnostic.id" >{{ diagnostic.name }} 
+                                    <option v-for="list_diagnostic in list_diagnostic" 
+                                            :key="list_diagnostic.id" 
+                                            :value="list_diagnostic.id" >{{ list_diagnostic.name }} 
                                     </option>
                                 </select>                                 
                                 <div class="valid-feedback">
@@ -198,20 +198,30 @@
             mdbInput,
             Navigation
         },
-        data(){
+        data(){ 
+            
             return {
+                patientID: this.$route.params.patientID,
                 form: {
-                    name: ''
+                    id_type: '',
+                    id_num: '',
+                    name: '',
+                    lastname: '',
+                    genre: '',
+                    occupation:'',
+                    birthday:'',
+
                 },
                 entity: [],
-                diagnostic: []
+                list_diagnostic: []
             }
+
         },
         methods: {
             onSubmit(event){
                 event.preventDefault()
-                const path= `${process.env.BASE_URI}patient/`
-                axios.post(path, this.form).then((response)=>{
+                const path=`http://localhost:8000/api/v1.0/patient/${this.patientID}/`;
+                axios.put(path, this.form).then((response)=>{
                     this.form.id_type = response.data.id_type
                     this.form.id_num = response.data.id_num
                     this.form.name = response.data.name
@@ -222,15 +232,30 @@
                     this.form.entity = response.data.entity
                     this.form.list_diagnostic = response.data.list_diagnostic
 
-                    swal("Paciente creado exitosamente.", "", "success")
+                    swal("Paciente actualizado exitosamente.", "", "success")
             })
                 .catch((error)=>{
-                    swal("No se ha podido crear el paciente.", "", "error")
+                    swal("No se ha podido actualizar el paciente.", "", "error")
                     console.log(error)
                 })
-            },  
+            },
+            getPatient(){
+            const path= `http://localhost:8000/api/v1.0/patient/${this.patientID}/`;
+                axios.get(path, this.form).then((response)=>{
+                    this.form.id_type = response.data.id_type
+                    this.form.id_num = response.data.id_num
+                    this.form.name = response.data.name
+                    this.form.lastname = response.data.lastname
+                    this.form.genre = response.data.genre
+                    this.form.occupation = response.data.occupation
+                    this.form.birthday = response.data.birthday
+                    this.form.entity = response.data.entity
+                    this.form.list_diagnostic = response.data.list_diagnostic
+            }).catch((error)=>{
+                    console.log(error)
+            })}, 
             getEntity (){
-                const path= `${process.env.BASE_URI}entity/` 
+                const path= 'http://localhost:8000/api/v1.0/entity/' 
             
                 axios.get(path).then((response) =>{
                     this.entity = response.data
@@ -240,10 +265,10 @@
                 })
             },
             getDiagnostic (){
-                const path= `${process.env.BASE_URI}diagnostic/` 
+                const path= 'http://localhost:8000/api/v1.0/diagnostic/' 
             
                 axios.get(path).then((response) =>{
-                    this.diagnostic = response.data
+                    this.list_diagnostic = response.data
                 })
                 .catch((error)=>{
                     console.log(error)
@@ -253,13 +278,15 @@
                 return value.toLowerCase()
         },
             checkForm(event) {
-            event.preventDefault();
             event.target.classList.add('was-validated');
+            this.onSubmit(event);
+            
             },              
         },
         created(){
-            this.getEntity()
-            this.getDiagnostic ()
+            this.getEntity();
+            this.getDiagnostic();
+            this.getPatient();
         }
     }
 </script>

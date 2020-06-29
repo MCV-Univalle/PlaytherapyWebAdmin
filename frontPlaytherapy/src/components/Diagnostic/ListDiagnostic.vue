@@ -1,184 +1,172 @@
-<template>
-  <mdb-container class="mt-5">  
-    <section class="demo-section">
-      <h4>Listado de diagnósticos registrados.</h4>
-      <section>
-        <mdb-datatable
-          :data="data2"
-          striped
-          bordered
-          arrows
-          :display="5"
-          responsive
-          defaultRow="Información no encontrada"
-          entriesTitle="Mostrar entradas"
-          searchPlaceholder="Buscar"          
-          noFoundMessage="Información no encontrada"
-          showingText="Cantidad"
-          focus
-          :tfoot="false"
-          @selectRow="selected = data2.rows[$event]"
-        />
+<template>  
+  <div>
+    <Navigation />
+    <main :style="{marginTop: '90px'}">              
+      <mdb-container>
+        <mdb-row class="mt-5 justify-content-start">
+            <h4 class="demo-title"><strong>Lista de diagnósticos</strong></h4>      
+        </mdb-row>
         <hr />
-        <h5>Editar el diagnóstico seleccionado:</h5>
-        <mdb-container v-if="selected">
-          <mdb-row>
-            <mdb-col>
-              <mdb-input v-model="selected.code" />
-            </mdb-col>
-            <mdb-col>
-              <mdb-input v-model="selected.name" />
-            </mdb-col>
-            <mdb-col>
-              <mdb-input v-model="selected.typeDiagnostic" />
-            </mdb-col>
-          </mdb-row>
-          <mdb-row>
-            <mdb-btn rounded color="info" @click.native="warning = true"><mdb-icon icon="trash-alt" /> Eliminar</mdb-btn>
-            <mdb-modal :show="warning" @close="warning = false" warning>
-              <mdb-modal-header>
-                <mdb-modal-title class="text-center">Advertencia!</mdb-modal-title>
-              </mdb-modal-header>
-              <mdb-modal-body>
-                <mdb-row>
-                  <mdb-col class="text-center">
-                    <mdb-icon icon="exclamation-triangle" size="4x" class="mb-3 animated rotateIn"/>
-                    <p class="card-text"><strong>¿Deseas eliminar el diagnóstico: {{selected.name}} {{ selected.lastname}}?</strong></p>
-                  </mdb-col>
-                </mdb-row>
-              </mdb-modal-body>
-              <mdb-modal-footer center>
-                <mdb-btn color="warning" @click.native="warning = false">Aceptar <mdb-icon icon="diamond" class="ml-1" color="white"/></mdb-btn>
-                <mdb-btn outline="warning" @click.native="warning = false">Cancelar</mdb-btn>
-              </mdb-modal-footer>
-            </mdb-modal>
-          </mdb-row>
-        </mdb-container>
-      </section>
-       <!--
-        <b-table striped hover :items="typeDiagnostic" :fields="fields">
-
-            <template v-slot:cell(action)="row" slote-scope="data">
-                <b-button size="sm" variant="primary" >
-                    Editar
-                </b-button>
-                <b-button size="sm" variant="danger"  >
-                    Eliminar
-                </b-button>
-                </template>
-
-        </b-table>-->
-    </section>
-  </mdb-container>   
+        <div class="flex-center">  
+          <section class="demo-section">
+            <section>
+              <div class="text-right mt-4">   
+                <mdb-btn size="sm" tag="a" color="info" href="/diagnostic/update" ><mdb-icon icon="user-edit" /> Editar</mdb-btn>               
+                <mdb-btn size="sm" color="danger" @click="hidden=true"><mdb-icon icon="trash" /> Eliminar</mdb-btn>
+              </div>
+              <mdb-datatable
+                :data="data"
+                striped
+                bordered
+                arrows
+                focus
+                :display="5"
+                responsive
+                entriesTitle="Mostrar entradas"
+                searchPlaceholder="Buscar"          
+                noFoundMessage="Información no encontrada"
+                showingText="Cantidad"
+                :tfoot= false
+              />                 
+              <mdb-container @hidden="handleHidden">
+                <mdb-modal centered :show="hidden" @close="hidden = false" warning>
+                  <mdb-modal-header>
+                    <mdb-modal-title center>Advertencia!</mdb-modal-title>
+                  </mdb-modal-header>
+                  <mdb-modal-body>
+                    <mdb-row>                     
+                      <mdb-col>
+                        <p class="card-text"><strong>¿Desea eliminar el diagnóstico {{}} ?</strong></p>
+                      </mdb-col>
+                    </mdb-row>
+                  </mdb-modal-body>
+                  <mdb-modal-footer center>
+                    <mdb-btn color="warning" @click="hidden = false">Aceptar</mdb-btn>
+                    <mdb-btn outline="warning" @click="hidden = false">Cancelar</mdb-btn>
+                  </mdb-modal-footer>
+                </mdb-modal>
+              </mdb-container>          
+            </section>                     
+          </section>           
+        </div>   
+      </mdb-container>            
+    </main>       
+  </div>    
 </template>
 
-
-
 <script>
-import axios from 'axios';
-import {
-  mdbDatatable,
-  mdbIcon,
-  mdbRow,
-  mdbCol,
-  mdbContainer,
-  mdbInput,
-  mdbModal,
-  mdbModalHeader,
-  mdbModalTitle,
-  mdbModalBody,
-  mdbModalFooter,
-  mdbBtn,
-} from "mdbvue";
-
-export default {
-    components: {
+    import axios from 'axios';
+    import {
         mdbDatatable,
-        mdbContainer,
-        mdbRow,
+        mdbBtn,
         mdbIcon,
-        mdbInput,
-        mdbCol,
+        mdbRow,
+        mdbContainer,
         mdbModal,
         mdbModalHeader,
         mdbModalTitle,
         mdbModalBody,
         mdbModalFooter,
-        mdbBtn,
+    } from "mdbvue";
+    import Navigation from '@/components/Navigation/Navigation';
+
+  export default {
+    components: {
+      mdbDatatable,
+      mdbBtn,
+      mdbContainer,
+      mdbIcon,
+      mdbRow,
+      Navigation,
+      mdbModal,
+      mdbModalHeader,
+      mdbModalTitle,
+      mdbModalBody,
+      mdbModalFooter,
     },
-    data(){
-        return{
-            warning: false,
-            entityId: this.$route.params.entityId,
-            fields: [
-                { key : 'name', label:'Nombre'},
-                { key : 'code', label:'Codigo'},
-                { key : 'type_diagnostic', label:'Tipo de diagnostico'},
-                { key : 'action', label:''}
-            ],
-            typeDiagnostic: [],
-            selected: null,
-            data2: {
-                columns: [
-                    {
-                        label: "Código",
-                        field: "code",
-                        sort: "asc"
-                    },
-                    {
-                        label: "Nombre",
-                        field: "name",
-                        sort: "asc"
-                    },
-                    {
-                        label: "Tipo de diagnóstico",
-                        field: "typeDiagnostic",
-                        sort: "asc"
-                    }
-                ],
-                rows: [         
-                {
-                    name: "Quinn ",
-                    typeDiagnostic: "Edinburgh",
-                    code: "22",
-                },
-                {
-                    name: "Charde",
-                    typeDiagnostic: "San Francisco",
-                    code: "36",
-                },
-                {
-                    name: "Haley",
-                    typeDiagnostic: "London",
-                    code: "43",
-                },          
-                {
-                    name: "Hope Fuentes",
-                    typeDiagnostic: "San Francisco",
-                    code: "41",
-                },
-                {
-                    name: "Vivian Harrell",
-                    typeDiagnostic: "San Francisco",
-                    code: "62",
-                }
-                ]
-            }
-        }
+    data() {
+      return {
+        columns: [],
+        rows: [],
+        hidden: false,
+      };
+    },
+    computed: {
+      data() {
+        return {          
+          columns: [
+            {
+              label: "Código",
+              field: "code",
+              sort: "asc"
+            },
+            {
+              label: "Nombre",
+              field: "name",
+              sort: "asc"
+            },
+            {
+              label: "Tipo de diagnóstico",
+              field: "typeDiagnostic",
+              sort: "asc"
+            },
+          ],
+          rows: this.rows 
+        };
+      },
     },
     methods: {
-        getTypeDiagnostic(){
-            const path = `${process.env.BASE_URI}diagnostic/`
-            axios.get(path).then((response) =>{
-                this.typeDiagnostic = response.data
-            })
-            .catch((error)=>{
-                console.log(error)
-            })
-        }
+      filterData(dataArr, keys) {
+        let data = dataArr.map(entry => {
+          let filteredEntry = {};
+          keys.forEach(key => {
+            if (key in entry) {
+              filteredEntry[key] = entry[key];
+            }
+          });
+          return filteredEntry;
+        });
+        return data;
+      }
     },
-    created(){
-        this.getTypeDiagnostic()
+    mounted(){
+      fetch('http://localhost:8000/api/v1.0/diagnostic/?format=json')
+        .then(res => res.json())
+        .then(json => {
+          let keys = ['code', 'name', 'typeDiagnostic'];
+          let entries = this.filterData(json, keys);
+          //columns
+          console.log(json)
+          this.columns = keys.map(key => {
+            return {
+              label: key,
+              field: key,
+            };
+          });
+          //rows
+          entries.map(entry => this.rows.push(entry));        
+        })
+        .catch(err => console.log(err));
     }
-}
+  };
 </script>
+
+<style scoped>
+    .demo-section {
+        padding: 20px 0;
+    }
+    .demo-section > section {
+        border: 1px solid #e0e0e0;
+        padding: 15px;
+    }
+    .demo-section > h4 {
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
+    .demo-title {
+        color: #9e9e9e;
+        font-weight: 700;
+        margin-bottom: 0;
+        padding-left: 15px;
+    }  
+</style>

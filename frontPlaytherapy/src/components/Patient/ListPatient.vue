@@ -10,8 +10,12 @@
         <div class="flex-center">  
           <section class="demo-section">
             <section>
-              <mdb-datatable 
-              
+              <div class="text-right mt-4">  
+                <mdb-btn size="sm" tag="a" color="blue-grey" href="/FIM/create" ><mdb-icon icon="calendar-check"/> FIM</mdb-btn>  
+                <mdb-btn size="sm" tag="a" color="info" href="/patient/update" ><mdb-icon icon="user-edit"/> Editar</mdb-btn>               
+                <mdb-btn size="sm" color="danger" @click="hidden=true"><mdb-icon icon="trash" /> Eliminar</mdb-btn>              
+              </div>
+              <mdb-datatable               
                 :data="data"
                 striped
                 bordered
@@ -23,7 +27,26 @@
                 noFoundMessage="Información no encontrada"
                 showingText="Cantidad"
                 :tfoot= false
+                focus
               />
+              <mdb-container @hidden="handleHidden">
+                <mdb-modal centered :show="hidden" @close="hidden = false" warning>
+                  <mdb-modal-header>
+                    <mdb-modal-title center>Advertencia!</mdb-modal-title>
+                  </mdb-modal-header>
+                  <mdb-modal-body>
+                    <mdb-row>                     
+                      <mdb-col>
+                        <p class="card-text"><strong>¿Desea eliminar al paciente {{}} ?</strong></p>
+                      </mdb-col>
+                    </mdb-row>
+                  </mdb-modal-body>
+                  <mdb-modal-footer center>
+                    <mdb-btn color="warning" @click="hidden = false">Aceptar</mdb-btn>
+                    <mdb-btn outline="warning" @click="hidden = false">Cancelar</mdb-btn>
+                  </mdb-modal-footer>
+                </mdb-modal>
+              </mdb-container>  
             </section>            
           </section>           
         </div>  
@@ -35,22 +58,37 @@
 <script>
   import {
     mdbDatatable,
+    mdbBtn,
+    mdbIcon,
     mdbRow,
     mdbContainer,
+    mdbModal,
+    mdbModalHeader,
+    mdbModalTitle,
+    mdbModalBody,
+    mdbModalFooter,
   } from "mdbvue";
   import Navigation from '@/components/Navigation/Navigation';
 
   export default {
     components: {
       mdbDatatable,
+      mdbBtn,
       mdbContainer,
+      mdbIcon,
       mdbRow,
       Navigation,
+      mdbModal,
+      mdbModalHeader,
+      mdbModalTitle,
+      mdbModalBody,
+      mdbModalFooter,
     },
     data() {
       return {
         columns: [],
-        rows: []
+        rows: [],
+        hidden: false,
       };
     },
     computed: {
@@ -91,21 +129,6 @@
               label: "Fecha de nacimiento",
               field: "birthday",
               sort: "asc"
-            },
-            {
-              label: "Medida de Independencia Funcional",
-              field: "FIM",
-              sort: "asc"
-            },
-            {
-              label: "",
-              field: "editar",
-              sort: false,
-            },
-            {
-              label: "",
-              field: "eliminar",
-              sort: false,
             },
           ],
           rows:this.rows

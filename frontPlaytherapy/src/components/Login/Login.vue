@@ -106,6 +106,7 @@
                 axios.get(pathToken, 
                 { headers: {"Authorization" : `Bearer ${localStorage.getItem('access')}`} }) .then((response) =>{
                     swal("Bienvenido a Playtherapy.", "", "success");
+                    this.$router.push("Home");
                 })
                 .catch((error)=>{
                      swal("Error en el servidor", "", "error");

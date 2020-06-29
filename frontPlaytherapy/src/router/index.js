@@ -1,7 +1,14 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import CreateDiagnostic from '@/components/Diagnostic/CreateDiagnostic';
 import ListDiagnostic from '@/components/Diagnostic/ListDiagnostic';
+import CreateDiagnostic from '@/components/Diagnostic/CreateDiagnostic';
+import UpdateDiagnostic from '@/components/Diagnostic/UpdateDiagnostic';
+import ListTypeDiagnostic from '@/components/TypeDiagnostic/ListTypeDiagnostic';
+import CreateTypeDiagnostic from '@/components/TypeDiagnostic/CreateTypeDiagnostic';
+import UpdateTypeDiagnostic from '@/components/TypeDiagnostic/UpdateTypeDiagnostic';
+import ListEntity from '@/components/Entity/ListEntity';
+import CreateEntity from '@/components/Entity/CreateEntity';
+import UpdateEntity from '@/components/Entity/UpdateEntity';
 import CreatePatient from '@/components/Patient/CreatePatient';
 import ListPatient from '@/components/Patient/ListPatient';
 import UpdatePatient from '@/components/Patient/UpdatePatient';
@@ -12,6 +19,7 @@ import CreateFim from '@/components/FIM/CreateFim';
 import Home from '@/components/Home/Home';
 import InitialInterface from '@/components/InitialInterface/InitialInterface';
 import Login from '@/components/Login/Login';
+import Reports from '@/components/Patient/Reports';
 
 Vue.use(Router);
 
@@ -28,14 +36,49 @@ export default new Router({
       component: Home
     },
     {
+      path: '/diagnostic',
+      name: 'ListDiagnostic',
+      component: ListDiagnostic
+    },
+    {
       path: '/diagnostic/create',
       name: 'CreateDiagnostic',
       component: CreateDiagnostic
     },
     {
-      path: '/diagnostic',
-      name: 'ListDiagnostic',
-      component: ListDiagnostic
+      path: '/diagnostic/:diagnosticID/update',
+      name: 'UpdateDiagnostic',
+      component: UpdateDiagnostic
+    },
+    {
+      path: '/typeDiagnostic',
+      name: 'ListTypeDiagnostic',
+      component: ListTypeDiagnostic
+    },
+    {
+      path: '/typeDiagnostic/create',
+      name: 'CreateTypeDiagnostic',
+      component: CreateTypeDiagnostic
+    },
+    {
+      path: '/typeDiagnostic/:typeDiagnosticID/update',
+      name: 'UpdateTypeDiagnostic',
+      component: UpdateTypeDiagnostic
+    },
+    {
+      path: '/entity',
+      name: 'ListEntity',
+      component: ListEntity
+    },
+    {
+      path: '/entity/create',
+      name: 'CreateEntity',
+      component: CreateEntity
+    },
+    {
+      path: '/entity/:entityID/update',
+      name: 'UpdateEntity',
+      component: UpdateEntity
     },
     {
       path: '/patient/create',
@@ -48,7 +91,7 @@ export default new Router({
       component: ListPatient
     },
     {
-      path: '/patient/update',
+      path: '/patient/:patientID/update',
       name: 'UpdatePatient',
       component: UpdatePatient
     },
@@ -68,9 +111,14 @@ export default new Router({
       component: ListTherapist
     },
     {
-      path: '/FIM/create',
+      path: '/FIM/:patientID/create',
       name: 'CreateFim',
       component: CreateFim
+    },
+    {
+      path: '/reports',
+      name: 'Reports',
+      component: Reports
     },
     {
       path: '/login',

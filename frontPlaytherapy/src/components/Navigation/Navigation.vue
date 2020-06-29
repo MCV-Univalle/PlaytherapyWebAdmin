@@ -23,8 +23,9 @@
                         waves-fixed
                         ><strong>Pacientes</strong></mdb-dropdown-toggle>
                         <mdb-dropdown-menu>
-                        <mdb-dropdown-item exact to="/patient/create">Registrar</mdb-dropdown-item>
-                        <mdb-dropdown-item exact to="/patient">Listar</mdb-dropdown-item>
+                            <mdb-dropdown-item exact to="/patient/create">Registrar</mdb-dropdown-item>
+                            <mdb-dropdown-item exact to="/patient">Listar</mdb-dropdown-item>                        
+                            <mdb-dropdown-item exact to="/patient/update">Actualizar</mdb-dropdown-item>
                         </mdb-dropdown-menu>
                     </mdb-dropdown>  
                     <mdb-dropdown tag="li" class="nav-item">
@@ -36,16 +37,28 @@
                         waves-fixed
                         ><strong>Terapeutas</strong></mdb-dropdown-toggle>
                         <mdb-dropdown-menu>
-                        <mdb-dropdown-item exact to="/therapist/create">Registrar</mdb-dropdown-item>
-                        <mdb-dropdown-item exact to="/therapist">Listar</mdb-dropdown-item>
+                            <mdb-dropdown-item exact to="/therapist/create">Registrar</mdb-dropdown-item>
+                            <mdb-dropdown-item exact to="/therapist">Listar</mdb-dropdown-item>
+                            <mdb-dropdown-item exact to="/therapist/update">Actualizar</mdb-dropdown-item>
                         </mdb-dropdown-menu>
-                    </mdb-dropdown><!--
-                    <mdb-nav-item exact to="/entitys">
-                        <strong>Entidad médica</strong>
-                    </mdb-nav-item>  
+                    </mdb-dropdown>
+                    <mdb-dropdown tag="li" class="nav-item">
+                        <mdb-dropdown-toggle
+                        tag="a"
+                        navLink
+                        color="info"
+                        slot="toggle"
+                        waves-fixed
+                        ><strong>Entidad médica</strong></mdb-dropdown-toggle>
+                        <mdb-dropdown-menu>
+                            <mdb-dropdown-item exact to="/entity/create">Registrar</mdb-dropdown-item>
+                            <mdb-dropdown-item exact to="/entity">Listar</mdb-dropdown-item>
+                            <mdb-dropdown-item exact to="/entity/update">Actualizar</mdb-dropdown-item>
+                        </mdb-dropdown-menu>
+                    </mdb-dropdown> <!-- 
                     <mdb-nav-item exact to="/FIM/create">
                         <strong>FIM</strong>
-                    </mdb-nav-item> 
+                    </mdb-nav-item> -->
                     <mdb-dropdown tag="li" class="nav-item">
                         <mdb-dropdown-toggle
                         tag="a"
@@ -55,10 +68,38 @@
                         waves-fixed
                         ><strong>Diagnóstico</strong></mdb-dropdown-toggle>
                         <mdb-dropdown-menu>
-                            <mdb-dropdown-item exact to="/diagnostic/create">Crear</mdb-dropdown-item>
-                            <mdb-dropdown-item exact to="/diagnostic">Listar</mdb-dropdown-item>
+                            <mdb-dropdown-item exact to="/diagnostic/create">Registrar</mdb-dropdown-item>
+                            <mdb-dropdown-item exact to="/diagnostic">Listar</mdb-dropdown-item>                            
+                            <mdb-dropdown-item exact to="/diagnostic/update">Actualizar</mdb-dropdown-item>
                         </mdb-dropdown-menu>
-                    </mdb-dropdown> -->
+                    </mdb-dropdown> 
+                    <mdb-dropdown tag="li" class="nav-item">
+                        <mdb-dropdown-toggle
+                        tag="a"
+                        navLink
+                        color="info"
+                        slot="toggle"
+                        waves-fixed
+                        ><strong>Tipo de diagnóstico</strong></mdb-dropdown-toggle>
+                        <mdb-dropdown-menu>
+                            <mdb-dropdown-item exact to="/typeDiagnostic/create">Registrar</mdb-dropdown-item>
+                            <mdb-dropdown-item exact to="/typeDiagnostic">Listar</mdb-dropdown-item>                            
+                            <mdb-dropdown-item exact to="/typeDiagnostic/update">Actualizar</mdb-dropdown-item>
+                        </mdb-dropdown-menu>
+                    </mdb-dropdown> 
+                    <mdb-dropdown tag="li" class="nav-item">
+                        <mdb-dropdown-toggle
+                        tag="a"
+                        navLink
+                        color="info"
+                        slot="toggle"
+                        waves-fixed
+                        ><strong>Reportes</strong></mdb-dropdown-toggle>
+                        <mdb-dropdown-menu>
+                            <mdb-dropdown-item exact to="/reports">Entrar</mdb-dropdown-item>
+
+                        </mdb-dropdown-menu>
+                    </mdb-dropdown>
                     <mdb-dropdown tag="li" class="nav-item">
                         <mdb-dropdown-toggle
                         tag="a"

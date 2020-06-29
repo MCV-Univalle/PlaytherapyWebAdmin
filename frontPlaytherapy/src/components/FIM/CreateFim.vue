@@ -29,7 +29,9 @@
                                 <div class="custom-control custom-checkbox lg" >
                                     <input type="checkbox" 
                                         class="custom-control-input" 
-                                        id="customControlValidation1">
+                                        id="customControlValidation1"
+                                        v-model.trim="form.goal"
+                                        >
                                     <label class="custom-control-label lg" for="customControlValidation1"></label>
                                 </div>                           
                             </div>
@@ -40,9 +42,9 @@
                             <h6 class="demo-title-small"><strong>Autocuidado</strong></h6>
                             <hr />
                             <div class="col-md-12 mb-6">
-                                <label class="margin-label" for="food">Comer</label>
+                                <label class="margin-label" for="eat">Comer</label>
                                 <select class="browser-default custom-select" 
-                                        v-model.trim="form.food" 
+                                        v-model.trim="form.eat" 
                                         placeholder="Comida" 
                                         required>
                                     <option value="1">1</option>
@@ -61,9 +63,9 @@
                                 </div>
                             </div>                            
                             <div class="col-md-12 mb-6">
-                                <label class="margin-label" for="personalCare">Arreglo personal</label>
+                                <label class="margin-label" for="personal_clean">Arreglo personal</label>
                                 <select class="browser-default custom-select" 
-                                        v-model.trim="form.personalCare" 
+                                        v-model.trim="form.personal_clean" 
                                         placeholder="Limpieza personal" 
                                         required>
                                     <option value="1">1</option>
@@ -82,9 +84,9 @@
                                 </div>
                             </div>  
                             <div class="col-md-12 mb-6">
-                                <label class="margin-label" for="shower">Bañarse/Ducharse</label>
+                                <label class="margin-label" for="bath">Bañarse/Ducharse</label>
                                 <select class="browser-default custom-select" 
-                                        v-model.trim="form.shower" 
+                                        v-model.trim="form.bath"     
                                         placeholder="Bañarse/Ducharse" 
                                         required>
                                     <option value="1">1</option>
@@ -103,9 +105,9 @@
                                 </div>
                             </div> 
                             <div class="col-md-12 mb-6">
-                                <label class="margin-label" for="clothedTop">Vestirse/Desvertirse superior</label>
+                                <label class="margin-label" for="dress_undress_sup">Vestirse/Desvertirse superior</label>
                                 <select class="browser-default custom-select" 
-                                        v-model.trim="form.clothedTop" 
+                                        v-model.trim="form.dress_undress_sup"  
                                         placeholder="Vestirse/Desvertirse Superior" 
                                         required>
                                     <option value="1">1</option>
@@ -124,9 +126,9 @@
                                 </div>
                             </div> 
                             <div class="col-md-12 mb-6">
-                                <label class="margin-label" for="clothedLow">Vestirse/Desvertirse inferior</label>
+                                <label class="margin-label" for="dress_undress_inf">Vestirse/Desvertirse inferior</label>
                                 <select class="browser-default custom-select" 
-                                        v-model.trim="form.clothedLow" 
+                                        v-model.trim="form.dress_undress_inf" 
                                         placeholder="Vestirse/Desvertirse Inferior" 
                                         required>
                                     <option value="1">1</option>
@@ -145,9 +147,9 @@
                                 </div>
                             </div>  
                             <div class="col-md-12 mb-6">
-                                <label class="margin-label" for="use">Uso del baño</label>
+                                <label class="margin-label" for="bathUse">Uso del baño</label>
                                 <select class="browser-default custom-select" 
-                                        v-model.trim="form.use" 
+                                        v-model.trim="form.bathUse" 
                                         placeholder="Uso del baño" 
                                         required>
                                     <option value="1">1</option>
@@ -168,9 +170,9 @@
                             <h6 class="demo-title-small"><strong>Control de esfínteres</strong></h6>
                             <hr />            
                             <div class="col-md-12 mb-6">
-                                <label class="margin-label" for="control">Control de heces</label>
+                                <label class="margin-label" for="control_dregs">Control de heces</label>
                                 <select class="browser-default custom-select" 
-                                        v-model.trim="form.control" 
+                                        v-model.trim="form.control_dregs" 
                                         placeholder="Control de heces" 
                                         required>
                                     <option value="1">1</option>
@@ -189,9 +191,9 @@
                                 </div>
                             </div> 
                             <div class="col-md-12 mb-6">
-                                <label class="margin-label" for="urine">Control de orina</label>
+                                <label class="margin-label" for="control_urine">Control de orina</label>
                                 <select class="browser-default custom-select" 
-                                        v-model.trim="form.urine" 
+                                        v-model.trim="form.control_urine" 
                                         placeholder="Control de orina" 
                                         required>
                                     <option value="1">1</option>
@@ -211,9 +213,9 @@
                             <h6 class="demo-title-small"><strong>Movilidad</strong></h6>
                             <hr />  
                             <div class="col-md-12 mb-6">
-                                <label class="margin-label" for="bed">Traslado de la cama a silla o silla de ruedas</label>
+                                <label class="margin-label" for="tras_bed_chair">Traslado de la cama a silla o silla de ruedas</label>
                                 <select class="browser-default custom-select" 
-                                        v-model.trim="form.bed" 
+                                        v-model.trim="form.tras_bed_chair" 
                                         placeholder="Cama, silla y silla de ruedas" 
                                         required>
                                     <option value="1">1</option>
@@ -232,9 +234,9 @@
                                 </div>
                             </div>  
                             <div class="col-md-12 mb-6">
-                                <label class="margin-label" for="bathroom">Traslado al baño</label>
+                                <label class="margin-label" for="tras_bath">Traslado al baño</label>
                                 <select class="browser-default custom-select" 
-                                        v-model.trim="form.bathroom" 
+                                        v-model.trim="form.tras_bath" 
                                         placeholder="Baño" 
                                         required>
                                     <option value="1">1</option>
@@ -253,9 +255,9 @@
                                 </div>
                             </div>              
                             <div class="col-md-12 mb-6">
-                                <label class="margin-label" for="douche">Traslado en bañera o ducha</label>
+                                <label class="margin-label" for="tras_shower">Traslado en bañera o ducha</label>
                                 <select class="browser-default custom-select" 
-                                        v-model.trim="form.douche" 
+                                        v-model.trim="form.tras_shower" 
                                         placeholder="Ducha" 
                                         required>
                                     <option value="1">1</option>
@@ -276,9 +278,9 @@
                             <h6 class="demo-title-small"><strong>Ambulación</strong></h6>
                             <hr />  
                             <div class="col-md-12 mb-6">
-                                <label class="margin-label" for="march">Caminar/desplazarse en silla de ruedas y gateo</label>
+                                <label class="margin-label" for="run_crawl_chair">Caminar/desplazarse en silla de ruedas y gateo</label>
                                 <select class="browser-default custom-select" 
-                                        v-model.trim="form.march" 
+                                        v-model.trim="form.run_crawl_chair" 
                                         placeholder="Marcha, silla de ruedas y gateo" 
                                         required>
                                     <option value="1">1</option>
@@ -297,9 +299,9 @@
                                 </div>
                             </div> 
                             <div class="col-md-12 mb-6">
-                                <label class="margin-label" for="grades">Subir y bajar escaleras</label>
+                                <label class="margin-label" for="steps">Subir y bajar escaleras</label>
                                 <select class="browser-default custom-select" 
-                                        v-model.trim="form.grades" 
+                                        v-model.trim="form.steps" 
                                         placeholder="Gradas" 
                                         required>
                                     <option value="1">1</option>
@@ -324,9 +326,9 @@
                             <h6 class="demo-title-small"><strong>Comunicación</strong></h6>
                             <hr />
                             <div class="col-md-12 mb-6">
-                                <label class="margin-label" for="compression">Compresión</label>
+                                <label class="margin-label" for="compresion">Compresión</label>
                                 <select class="browser-default custom-select" 
-                                        v-model.trim="form.compression" 
+                                        v-model.trim="form.compresion" 
                                         placeholder="Compresión" 
                                         required>
                                     <option value="1">1</option>
@@ -345,9 +347,9 @@
                                 </div>
                             </div>            
                             <div class="col-md-12 mb-6">
-                                <label class="margin-label" for="expression">Expresión</label>
+                                <label class="margin-label" for="expresion">Expresión</label>
                                 <select class="browser-default custom-select" 
-                                        v-model.trim="form.expression" 
+                                        v-model.trim="form.expresion" 
                                         placeholder="Expresión" 
                                         required>
                                     <option value="1">1</option>
@@ -368,9 +370,9 @@
                             <h6 class="demo-title-small"><strong>Conocimiento social</strong></h6>
                             <hr />
                             <div class="col-md-12 mb-6">
-                                <label class="margin-label" for="social">Interacción social</label>
+                                <label class="margin-label" for="social_inter">Interacción social</label>
                                 <select class="browser-default custom-select" 
-                                        v-model.trim="form.social" 
+                                        v-model.trim="form.social_inter" 
                                         placeholder="Interacción social" 
                                         required>
                                     <option value="1">1</option>
@@ -389,9 +391,9 @@
                                 </div>
                             </div> 
                             <div class="col-md-12 mb-6">
-                                <label class="margin-label" for="problem">Resolver problema</label>
+                                <label class="margin-label" for="problem_solve">Resolver problema</label>
                                 <select class="browser-default custom-select" 
-                                        v-model.trim="form.problem" 
+                                        v-model.trim="form.problem_solve" 
                                         placeholder="Resolver problema" 
                                         required>
                                     <option value="1">1</option>
@@ -459,27 +461,68 @@
         },
         data(){
             return {
+                patientID: this.$route.params.patientID,
                 form: {
                     name: ''
-                }
+                },
+                patient: []
+
             }
         },
         methods: {
             onSubmit(event){
                 event.preventDefault()
-                const path= `${process.env.BASE_URI}FIM/`
-                axios.post(path, this.form).then((response)=>{
-                    swal("FIM creado exitosamente.", "", "success")
+                const path= 'http://localhost:8000/api/v1.0/FIM/'
+                var postData = {
+                        date : this.form.date,                
+                        goal : this.form.goal,
+                        patient: this.patient.id,
+                        eat : this.form.eat,
+                        personal_clean : this.form.personal_clean,
+                        bath : this.form.bath,
+                        dress_undress_sup : this.form.dress_undress_sup ,
+                        dress_undress_inf : this.form.dress_undress_inf,
+                        bathUse : this.form.bathUse,
+                        control_dregs : this.form.control_dregs,
+                        control_urine : this.form.control_urine,
+                        tras_bed_chair : this.form.tras_bed_chair,
+                        tras_bath : this.form.tras_bath,
+                        tras_shower : this.form.tras_shower ,
+                        run_crawl_chair : this.form.run_crawl_chair,
+                        steps : this.form.steps,
+                        compresion : this.form.compresion,
+                        expresion : this.form.expresion,
+                        social_inter : this.form.social_inter,
+                        problem_solve : this.form.problem_solve,
+                        memory : this.form.memory
+                        
+                };
+                axios.post(path, postData).then((response)=>{
+                swal("FIM del paciente " + this.patient.name + " creado exitosamente.", "", "success")
             })
                 .catch((error)=>{
                     swal("No se ha podido crear el FIM.", "", "error")
                     console.log(error)
                 })
             },
+            getPatient (){
+                const path= `http://localhost:8000/api/v1.0/patient/${this.patientID}/`;
+            
+                axios.get(path).then((response) =>{
+                    this.patient = response.data
+                })
+                .catch((error)=>{
+                    console.log(error)
+                })
+            },
             checkForm(event) {
-                event.preventDefault();
-                event.target.classList.add('was-validated');
-            }
+            event.target.classList.add('was-validated');
+            this.onSubmit(event);
+            
+            },              
+        },
+        created(){
+            this.getPatient();
         }
     }
 </script>
