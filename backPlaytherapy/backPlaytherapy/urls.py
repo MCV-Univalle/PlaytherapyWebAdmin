@@ -24,6 +24,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/v1.0/', include('apps.patients.urls')),
     path('api/v1.0/', include('apps.FIM.urls')),
+    path('api/v1.0/', include('apps.start.urls')),
     path('auth/', include('djoser.urls')),
 	path('auth/', include('djoser.urls.jwt')),
 	path('api/v1.0/therapists/', include('apps.therapists.urls')),

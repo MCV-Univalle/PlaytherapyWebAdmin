@@ -7,16 +7,13 @@
                     <h4 class="demo-title"><strong>Reportes</strong></h4>      
                 </mdb-row>
                 <hr />   
-                <section class="demo-section">
-                   <mdb-container>
-                    <mdb-radar-chart
-                    :data="radarChartData"
-                    :options="radarChartOptions"
-                    :width="600"
-                    :height="300"
-                    ></mdb-radar-chart>
-                </mdb-container>
-                </section>
+            <mdb-line-chart
+                :data="lineChartData"
+                :options="lineChartOptions"
+                :width="600"
+                :height="300"
+            ></mdb-line-chart>
+ 
             </mdb-container>               
         </main>
     </div>      
@@ -42,6 +39,7 @@
         mdbRadarChart,
         mdbTblHead, 
         mdbTblBody,
+        mdbLineChart,
     } from "mdbvue";
     import Navigation from '@/components/Navigation/Navigation';
 
@@ -67,19 +65,20 @@
             mdbTbl, 
             mdbTblHead, 
             mdbTblBody,
+            mdbLineChart,
             Navigation
         },
-        data() {
+    data() {
       return {
-        radarChartData: {
+        lineChartData: {
           labels: [
-            "Eating",
-            "Drinking",
-            "Sleeping",
-            "Designing",
-            "Coding",
-            "Cycling",
-            "Running"
+            "Enero",
+            "Febrero",
+            "Marzo",
+            "Abril",
+            "Mayo",
+            "Junio",
+            "Julio"
           ],
           datasets: [
             {
@@ -87,23 +86,34 @@
               backgroundColor: "rgba(255, 99, 132, 0.1)",
               borderColor: "rgba(255, 99, 132, 1)",
               borderWidth: 0.7,
-              data: [65, 59, 90, 81, 56, 55, 40]
-            },
-            {
-              label: "My Second dataset",
-              backgroundColor: "rgba(75, 192, 192, 0.2)",
-              borderColor: "rgba(75, 192, 192, 1)",
-              borderWidth: 0.7,
-              data: [28, 48, 40, 19, 96, 27, 100]
+              data: [65, 59, 80, 81, 56, 55, 40]
             }
           ]
         },
-        radarChartOptions: {
+        lineChartOptions: {
           responsive: false,
-          maintainAspectRatio: false
+          maintainAspectRatio: false,
+          scales: {
+            xAxes: [
+              {
+                gridLines: {
+                  display: true,
+                  color: "rgba(0, 0, 0, 0.1)"
+                }
+              }
+            ],
+            yAxes: [
+              {
+                gridLines: {
+                  display: true,
+                  color: "rgba(0, 0, 0, 0.1)"
+                }
+              }
+            ]
+          }
         }
       };
-    },
+    }
     
   };
 </script>

@@ -10,16 +10,15 @@
         <div class="flex-center">  
           <section class="demo-section">
             <section>
+              
               <div class="text-right mt-4">   
 <!--                 :to="{ name:'UpdateTypeDiagnostic', params:{ typeDiagnosticID: data.id}}"-->  
 <!--                  @click='getSpecificTD(data.id)'-->               
 
-                <mdb-btn size="sm" tag="a" color="info" :to="{ name:'UpdateTypeDiagnostic', params:{ typeDiagnosticID: data.id}}"><mdb-icon icon="user-edit" /> Editar</mdb-btn>               
+                <mdb-btn size="sm" tag="a" color="info" @click="selectElement()"><mdb-icon icon="user-edit" /> Editar</mdb-btn>               
                 <mdb-btn size="sm" color="danger" @click="hidden=true"><mdb-icon icon="trash" /> Eliminar</mdb-btn>
               </div>
               <mdb-datatable
-                @click:row="rowClick" item-key="name"
-                single-select
                 :data="data"
                 striped
                 bordered
@@ -32,12 +31,21 @@
                 noFoundMessage="Información no encontrada"
                 showingText="Cantidad"
                 :tfoot= false
-                
-              />                 
+                @selectRow="selected = data.rows[$event]" 
+              />    
+                <mdb-container v-if="selected">
+          <mdb-row>
+            <mdb-col>
+              <mdb-input v-model="selected.name" />
+            </mdb-col>
+</mdb-row>
+        </mdb-container>  
+                      
               <mdb-container @hidden="handleHidden">
                 <mdb-modal centered :show="hidden" @close="hidden = false" warning>
                   <mdb-modal-header>
                     <mdb-modal-title center>Advertencia!</mdb-modal-title>
+                     
                   </mdb-modal-header>
                   <mdb-modal-body>
                     <mdb-row>                     
@@ -92,6 +100,7 @@
     },
     data() {
       return {
+        specificTP: [],
         columns: [],
         rows: [],
         hidden: false,
@@ -123,14 +132,15 @@
           return filteredEntry;
         });
         return data;
-      },
-      rowClick: function (item, row) {   
-        console.log("GG");   
-        row.select(true);
-        console.log("GG");   
-        //item  - selected item
-      }
+      }    
     },
+    selectElement(params){
+      
+        console.log("GG");
+                specificTP[params];
+
+      }
+    ,
     mounted(){
       fetch('http://localhost:8000/api/v1.0/typeDiagnostic/?format=json')
         .then(res => res.json())
@@ -138,7 +148,6 @@
           let keys = ['name'];
           let entries = this.filterData(json, keys);
           //columns
-          console.log(json)
           this.columns = keys.map(key => {
             return {
               label: key,
